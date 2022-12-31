@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { StockService } from "../services/StockService";
 import Stock from "./Stock";
@@ -10,6 +10,41 @@ const UserPage = () => {
   const [stock, setStocks] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userStocks, setuserStocks] = useState(null);
+  const ref2 = useRef();
+
+  const [order, setOrder] = useState({
+    ticker: "",
+    numOfShares: "",
+    orderType: "SELL",
+    expiry: "",
+    limitValue: "",
+    emailId: localStorage.getItem("email"),
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setOrder({ ...order, [e.target.name]: value });
+  };
+
+  const SellStocks = (e, ticker) => {
+    console.log(ticker);
+    order.ticker = ticker;
+    console.log(order);
+    e.preventDefault();
+    new StockService()
+      .placeOrder(order)
+      .then((response) => {
+        console.log("navigate");
+        console.log(response);
+        navigate("/user");
+        ref2.current.close();
+        // window.location.reload(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("unsuccessful");
+      });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,8 +53,10 @@ const UserPage = () => {
         console.log("user page");
         const response1 = await new StockService().getStocks();
         setStocks(response1.data);
+        console.log("user");
         const response2 = await new StockService().getUserStocks(); //userstocks service
         setuserStocks(response2.data);
+        console.log("userstocks");
       } catch (error) {
         console.log(error);
       }
@@ -27,6 +64,11 @@ const UserPage = () => {
     };
     fetchData();
   }, []);
+
+  const logout = (e) => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   return (
     <div className="container mx-auto my-8">
@@ -116,6 +158,7 @@ const UserPage = () => {
                   <div className="text-sm text-gray-500">
                     <a>
                       <Popup
+                        ref={ref2}
                         trigger={
                           <button /*onClick={(e,ticker)=> placeOrder(e,ticker)*/
                             className="text-indigo-300 hover:text-indigo-800 px-4 hover:cursor-pointer"
@@ -135,9 +178,9 @@ const UserPage = () => {
                                 </label>
                                 <input
                                   type="text"
-                                  name="fullName"
+                                  name="ticker"
                                   value={userStocks.id.ticker}
-                                  /*onChange={(e) => handleChange(e)}*/
+                                  onChange={(e) => handleChange(e)}
                                   className="h-10 w-96 border mt-2 px-2 py-2"
                                 ></input>
                               </div>
@@ -147,7 +190,8 @@ const UserPage = () => {
                                 </label>
                                 <input
                                   type="text"
-                                  name="fullName"
+                                  name="numOfShares"
+                                  onChange={(e) => handleChange(e)}
                                   className="h-10 w-96 border mt-2 px-2 py-2"
                                 ></input>
                               </div>
@@ -159,6 +203,7 @@ const UserPage = () => {
                                 <input
                                   type="text"
                                   name="limitValue"
+                                  onChange={(e) => handleChange(e)}
                                   className="h-10 w-96 border mt-2 px-2 py-2"
                                 ></input>
                               </div>
@@ -170,11 +215,17 @@ const UserPage = () => {
                                 <input
                                   type="datetime-local"
                                   name="expiry"
+                                  onChange={(e) => handleChange(e)}
                                   className="h-10 w-96 border mt-2 px-2 py-2"
                                 ></input>
                               </div>
                               <div className="text-center justify-center h-14 w-full my-4 space-x-4 pt-4">
-                                <button className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6">
+                                <button
+                                  onClick={(e, ticker) =>
+                                    SellStocks(e, userStocks.id.ticker)
+                                  }
+                                  className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
+                                >
                                   Sell
                                 </button>
                                 <button className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6">
@@ -212,6 +263,12 @@ const UserPage = () => {
             className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
           >
             MyTransactions
+          </button>
+          <button
+            onClick={logout}
+            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+          >
+            Logout
           </button>
         </tr>
       </thead>

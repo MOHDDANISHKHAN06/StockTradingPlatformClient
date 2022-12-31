@@ -2,10 +2,7 @@ import React from "react";
 
 const Order = ({ order }) => {
   return (
-    <tr key={order.id}>
-      <td className="text-left px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-500">{order.id}</div>
-      </td>
+    <tr>
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">{order.orderType}</div>
       </td>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
@@ -6,6 +7,9 @@ import "reactjs-popup/dist/index.css";
 import { StockService } from "../services/StockService";
 
 const Stock = ({ stock }) => {
+  const navigate = useNavigate();
+  const ref = useRef();
+
   const [order, setOrder] = useState({
     ticker: "",
     numOfShares: "",
@@ -19,14 +23,17 @@ const Stock = ({ stock }) => {
     setOrder({ ...order, [e.target.name]: value });
   };
 
-  const navigate = useNavigate();
   const BuyStocks = (e) => {
     order.ticker = stock.ticker;
     e.preventDefault();
     new StockService()
       .placeOrder(order)
       .then((response) => {
+        console.log("navigate");
+        console.log(response);
         navigate("/user");
+        ref.current.close();
+        // window.location.reload(true);
       })
       .catch((error) => {
         console.log(order);
@@ -65,6 +72,7 @@ const Stock = ({ stock }) => {
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <a>
           <Popup
+            ref={ref}
             trigger={
               <button /*onClick={(e,ticker)=> placeOrder(e,ticker)*/
                 className="text-indigo-300 hover:text-indigo-800 px-4 hover:cursor-pointer"

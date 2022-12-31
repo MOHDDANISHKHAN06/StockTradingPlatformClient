@@ -11,6 +11,7 @@ export class StockService {
     return instance.get(STOCK_API_BASE_URL);
   }
   getUserStocks() {
+    console.log("getUserStocks");
     return instance.get(USERSTOCK_API_BASE_URL);
   }
   getOrders() {
@@ -18,5 +19,8 @@ export class StockService {
   }
   placeOrder(order) {
     return instance.post(BUY_SELL_API_BASE_URL, order);
+  }
+  addStock(stock) {
+    return instance.post(STOCK_API_BASE_URL, stock);
   }
 }

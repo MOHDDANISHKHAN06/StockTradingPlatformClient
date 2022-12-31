@@ -60,7 +60,7 @@ const LoginPage = () => {
             Password
           </label>
           <input
-            type="text"
+            type="password"
             name="password"
             value={login.password}
             onChange={(e) => handleChange(e)}
@@ -70,7 +70,7 @@ const LoginPage = () => {
         <div className="items-center justify-center h-14 w-full my-4 space-x-4 pt-4">
           <button
             onClick={(e) => signIn(e)}
-            className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6"
+            className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
           >
             Login
           </button>
@@ -79,6 +79,12 @@ const LoginPage = () => {
             className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
           >
             Clear
+          </button>
+          <button
+            onClick={() => navigate("/register")}
+            className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
+          >
+            SignUP
           </button>
         </div>
       </div>

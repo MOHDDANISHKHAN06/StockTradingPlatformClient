@@ -1,21 +1,32 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import UserService from "../services/UserService";
-// import UserService from "../services/UserService";
+import { UserService } from "../services/UserService";
 
 const Wallet = () => {
   const [wallet, setWallet] = useState({
     cashAvailable: "",
     buyingPower: "",
   });
+  const navigate = useNavigate();
+  const ref = useRef();
+  const ref2 = useRef();
 
-  // const handleChange = (e) => {
-  //   const value = e.target.value;
-  //   setWallet({ ...wallet, [e.target.name]: value });
-  // };
+  const [transaction, setTransaction] = useState({
+    emailId: localStorage.getItem("email"),
+    transactionType: "",
+    transactionAmount: "",
+    date: "",
+    time: "",
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setTransaction({ ...transaction, [e.target.name]: value });
+  };
 
   // const reset = (e) => {
   //   e.preventDefault();
@@ -26,13 +37,50 @@ const Wallet = () => {
   // };
 
   const [loading, setLoading] = useState(true);
-  //const [wallet, setWallet] = useState(null);
+
+  const Deposit = (e) => {
+    transaction.transactionType = "DEPOSIT";
+    console.log(transaction);
+    e.preventDefault();
+    new UserService()
+      .transactionWallet(transaction)
+      .then((response) => {
+        console.log("respose");
+        console.log(response);
+        navigate("/wallet");
+        ref.current.close();
+        // window.location.reload(true);
+      })
+      .catch((error) => {
+        console.log(transaction);
+        console.log(error);
+      });
+  };
+
+  const Withdraw = (e) => {
+    transaction.transactionType = "WITHDRAW";
+    console.log(transaction);
+    e.preventDefault();
+    new UserService()
+      .transactionWallet(transaction)
+      .then((response) => {
+        console.log("respose");
+        console.log(response);
+        navigate("/wallet");
+        ref2.current.close();
+        // window.location.reload(true);
+      })
+      .catch((error) => {
+        console.log(transaction);
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await UserService.getWallet();
+        const response = await new UserService().getWallet();
         setWallet(response.data);
         console.log(response.data);
       } catch (error) {
@@ -77,10 +125,9 @@ const Wallet = () => {
         </div>
         <div className="items-center justify-center h-14 w-full my-4 space-x-4 pt-4">
           <Popup
+            ref={ref}
             trigger={
-              <button /*onClick={(e,ticker)=> placeOrder(e,ticker)*/
-                className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
-              >
+              <button className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6">
                 {" "}
                 Deposit{" "}
               </button>
@@ -97,8 +144,7 @@ const Wallet = () => {
                     <input
                       type="text"
                       name="transactionAmount"
-                      /*value = {User.fullName}*/
-                      // onChange={(e) => handleChange(e)}
+                      onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
                     ></input>
                   </div>
@@ -111,12 +157,14 @@ const Wallet = () => {
                       name="transactionType"
                       value={"DEPOSIT"}
                       disabled={"disabled"}
-                      // onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
                     ></input>
                   </div>
                   <div className="text-center justify-center h-14 w-full my-4 space-x-4 pt-4">
-                    <button className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6">
+                    <button
+                      onClick={Deposit}
+                      className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
+                    >
                       Deposit
                     </button>
                     <button
@@ -131,6 +179,7 @@ const Wallet = () => {
             </span>
           </Popup>
           <Popup
+            ref={ref2}
             trigger={
               <button /*onClick={(e,ticker)=> placeOrder(e,ticker)*/
                 className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
@@ -151,8 +200,7 @@ const Wallet = () => {
                     <input
                       type="text"
                       name="transactionAmount"
-                      /*value = {User.fullName}*/
-                      // onChange={(e) => handleChange(e)}
+                      onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
                     ></input>
                   </div>
@@ -165,12 +213,14 @@ const Wallet = () => {
                       name="transactionType"
                       value={"WITHDRAW"}
                       disabled={"disabled"}
-                      // onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
                     ></input>
                   </div>
                   <div className="text-center justify-center h-14 w-full my-4 space-x-4 pt-4">
-                    <button className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6">
+                    <button
+                      onClick={Withdraw}
+                      className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
+                    >
                       Withdraw
                     </button>
                     <button

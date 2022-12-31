@@ -33,9 +33,9 @@ const OrderList = () => {
       <table className="min-w-full">
         <thead className="bg-gray-400">
           <tr>
-            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+            {/* <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
               Id
-            </th>
+            </th> */}
             <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
               Type
             </th>

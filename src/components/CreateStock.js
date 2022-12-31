@@ -1,41 +1,51 @@
 import React, { useState } from "react";
+import { StockService } from "../services/StockService";
 import { useNavigate } from "react-router-dom";
-import { UserService } from "../services/UserService";
 
-const AddUser = () => {
-  const [User, setUser] = useState({
-    emailId: "",
-    fullName: "",
-    userName: "",
-    password: "",
+const CreateStock = () => {
+  const navigate = useNavigate();
+
+  const [stock, setStock] = useState({
+    ticker: "",
+    companyName: "",
+    initialPrice: "",
+    currentPrice: "",
+    volume: 0,
+    dayHigh: 0,
+    dayLow: 0,
+    marketCapitalisation: "",
   });
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setUser({ ...User, [e.target.name]: value });
+    setStock({ ...stock, [e.target.name]: value });
   };
-  const navigate = useNavigate();
 
-  const saveUser = (e) => {
+  const saveStock = (e) => {
+    stock.currentPrice = stock.initialPrice;
+    stock.dayLow = stock.initialPrice;
+    stock.dayHigh = stock.initialPrice;
     e.preventDefault();
-    new UserService()
-      .saveUser(User)
+    console.log(stock);
+    new StockService()
+      .addStock(stock)
       .then((response) => {
-        navigate("/");
-        console.log(response);
+        navigate("/stocks");
+        console.log(stock);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(stock);
+        console.log("error");
       });
   };
 
   const reset = (e) => {
     e.preventDefault();
-    setUser({
-      emailId: "",
-      fullName: "",
-      userName: "",
-      password: "",
+    setStock({
+      ticker: "",
+      companyName: "",
+      initialPrice: "",
+      marketCapitalisation: "",
     });
   };
 
@@ -43,59 +53,59 @@ const AddUser = () => {
     <div className="flex max-w-2xl mx-auto shadow border-b">
       <div className="px-8 py-8">
         <div className="font-bold font-center text-2xl tracking-wider">
-          <h1>Create New User</h1>
+          <h1>Create New Stock</h1>
         </div>
         <div className="items-center justify-center h-14 w-full my-4">
           <label className="block text-gray-600 text-sm font-normal">
-            Full Name
+            Ticker
           </label>
           <input
             type="text"
-            name="fullName"
-            value={User.fullName}
+            name="ticker"
+            value={stock.ticker}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
         </div>
         <div className="items-center justify-center h-14 w-full my-4">
           <label className="block text-gray-600 text-sm font-normal">
-            Username
+            Company Name
           </label>
           <input
             type="text"
-            name="userName"
-            value={User.userName}
+            name="companyName"
+            value={stock.companyName}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
         </div>
         <div className="items-center justify-center h-14 w-full my-4">
           <label className="block text-gray-600 text-sm font-normal">
-            Email
+            Initial Price
           </label>
           <input
-            type="email"
-            name="emailId"
-            value={User.emailId}
+            type="number"
+            name="initialPrice"
+            value={stock.initialPrice}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
         </div>
         <div className="items-center justify-center h-14 w-full my-4">
           <label className="block text-gray-600 text-sm font-normal">
-            Password
+            Market Capitalisation
           </label>
           <input
-            type="password"
-            name="password"
-            value={User.password}
+            type="number"
+            name="marketCapitalisation"
+            value={stock.marketCapitalisation}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
         </div>
         <div className="items-center justify-center h-14 w-full my-4 space-x-4 pt-4">
           <button
-            onClick={saveUser}
+            onClick={saveStock}
             className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6"
           >
             Save
@@ -112,4 +122,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default CreateStock;
