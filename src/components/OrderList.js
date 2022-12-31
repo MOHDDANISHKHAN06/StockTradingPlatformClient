@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import Order from "./Order";
+import { useEffect, useState } from "react";
 import { StockService } from "../services/StockService";
-import Stock from "./Stock";
 
-const StockList = () => {
-  const navigate = useNavigate();
-  const [stock, setStocks] = useState(null);
+const OrderList = () => {
+  const [order, setOrders] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await new StockService().getStocks();
-        setStocks(response.data);
+        const response = await new StockService().getOrders();
+        setOrders(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -24,58 +23,46 @@ const StockList = () => {
 
   return (
     <div className="container mx-auto my-8">
-      <div className="h-12">
-        <button
-          onClick={() => navigate("/login")}
-          className="rounded bg-slate-600 text-white px-6 py-2 font-semibold"
-        >
-          Login
-        </button>
-      </div>
-      <div className="h-12">
-        <button
-          onClick={() => navigate("/register")}
-          className="rounded bg-slate-600 text-white px-6 py-2 font-semibold"
-        >
-          SignUp
-        </button>
+      <div className="bg-gray-800">
+        <div className="h-16 px-8 flex items-center">
+          <p className="text-white text-center font-bold font-center">
+            List Of Orders
+          </p>
+        </div>
       </div>
       <table className="min-w-full">
         <thead className="bg-gray-400">
           <tr>
             <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+              Id
+            </th>
+            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+              Type
+            </th>
+            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+              Number of shares
+            </th>
+            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+              Expiry Date
+            </th>
+            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+              Status
+            </th>
+            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
               Ticker
             </th>
             <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Company Name
+              Limit Value
             </th>
             <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Opening Price
-            </th>
-            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Current Price
-            </th>
-            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Volume
-            </th>
-            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Day High
-            </th>
-            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Day Low
-            </th>
-            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Market Capitalisation
-            </th>
-            <th className=" Display:none text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Operation
+              Action
             </th>
           </tr>
         </thead>
         {!loading && (
           <tbody className="bg-white">
-            {stock.map((stock) => (
-              <Stock stock={stock} key={stock.ticker}></Stock>
+            {order.map((order) => (
+              <Order order={order} key={order.id}></Order>
             ))}
           </tbody>
         )}
@@ -84,4 +71,4 @@ const StockList = () => {
   );
 };
 
-export default StockList;
+export default OrderList;
