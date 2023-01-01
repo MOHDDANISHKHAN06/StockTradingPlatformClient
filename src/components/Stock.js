@@ -16,7 +16,7 @@ const Stock = ({ stock }) => {
     orderType: "BUY",
     expiry: "",
     limitValue: "",
-    emailId: localStorage.getItem("email"),
+    emailId: sessionStorage.getItem("emailId"),
   });
   const handleChange = (e) => {
     const value = e.target.value;
@@ -33,7 +33,7 @@ const Stock = ({ stock }) => {
         console.log(response);
         navigate("/user");
         ref.current.close();
-        // window.location.reload(true);
+        window.location.reload(true);
       })
       .catch((error) => {
         console.log(order);

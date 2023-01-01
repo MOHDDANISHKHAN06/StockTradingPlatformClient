@@ -25,16 +25,20 @@ const LoginPage = () => {
     new LoginService()
       .loginUser(login.emailId, login.password)
       .then((response) => {
-        console.log("looging");
+        console.log(response.data.roles[0]);
         var user = {};
-        localStorage.setItem("email", login.emailId);
         user.authdata = window.btoa(login.emailId + ":" + login.password);
-        localStorage.setItem("user", JSON.stringify(user));
+        user.emailId = login.emailId;
+        user.role = response.data.roles[0];
+        sessionStorage.setItem("emailId", login.emailId);
+        sessionStorage.setItem("user", JSON.stringify(user));
         navigate("/user");
+        window.location.reload(true);
       })
       .catch((error) => {
         console.log(error);
-        localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("emailId");
       });
   };
   return (

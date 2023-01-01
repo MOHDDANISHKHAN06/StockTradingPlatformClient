@@ -6,11 +6,18 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 const UserPage = () => {
+  var userRole = JSON.parse(sessionStorage.getItem("user")).role;
+  console.log(userRole);
+  var flag = false;
+  if (userRole === `ADMIN`) flag = true;
+  console.log(flag);
+
   const navigate = useNavigate();
   const [stock, setStocks] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userStocks, setuserStocks] = useState(null);
-  const ref2 = useRef();
+
+  const ref = useRef();
 
   const [order, setOrder] = useState({
     ticker: "",
@@ -18,7 +25,7 @@ const UserPage = () => {
     orderType: "SELL",
     expiry: "",
     limitValue: "",
-    emailId: localStorage.getItem("email"),
+    emailId: sessionStorage.getItem("emailId"),
   });
 
   const handleChange = (e) => {
@@ -37,8 +44,8 @@ const UserPage = () => {
         console.log("navigate");
         console.log(response);
         navigate("/user");
-        ref2.current.close();
-        // window.location.reload(true);
+        ref.current.close();
+        window.location.reload(true);
       })
       .catch((error) => {
         console.log(error);
@@ -50,13 +57,13 @@ const UserPage = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        console.log("user page");
+        //console.log("user page");
         const response1 = await new StockService().getStocks();
         setStocks(response1.data);
-        console.log("user");
+        //console.log("user");
         const response2 = await new StockService().getUserStocks(); //userstocks service
         setuserStocks(response2.data);
-        console.log("userstocks");
+        // console.log("userstocks");
       } catch (error) {
         console.log(error);
       }
@@ -66,7 +73,7 @@ const UserPage = () => {
   }, []);
 
   const logout = (e) => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     navigate("/login");
   };
 
@@ -158,7 +165,7 @@ const UserPage = () => {
                   <div className="text-sm text-gray-500">
                     <a>
                       <Popup
-                        ref={ref2}
+                        ref={ref}
                         trigger={
                           <button /*onClick={(e,ticker)=> placeOrder(e,ticker)*/
                             className="text-indigo-300 hover:text-indigo-800 px-4 hover:cursor-pointer"
@@ -244,7 +251,7 @@ const UserPage = () => {
           </tbody>
         )}
       </table>
-      <thead className="bg-gray-400">
+      <div>
         <tr>
           <button
             onClick={() => navigate("/wallet")}
@@ -265,13 +272,27 @@ const UserPage = () => {
             MyTransactions
           </button>
           <button
+            hidden={!flag}
+            onClick={() => navigate("/createstock")}
+            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+          >
+            Create Stock
+          </button>
+          <button
+            hidden={!flag}
+            onClick={() => navigate("/listofusers")}
+            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+          >
+            View Users List
+          </button>
+          <button
             onClick={logout}
             className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
           >
             Logout
           </button>
         </tr>
-      </thead>
+      </div>
     </div>
   );
 };

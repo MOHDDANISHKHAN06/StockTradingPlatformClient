@@ -21,7 +21,7 @@ const instance = axios.create();
 instance.interceptors.request.use((req) => {
   // `req` is the Axios request config, so you can modify
   // the `headers`.
-  let user = localStorage.getItem("user");
+  let user = sessionStorage.getItem("user");
   if (user) {
     user = JSON.parse(user);
     req.headers.authorization = "Basic " + user.authdata;

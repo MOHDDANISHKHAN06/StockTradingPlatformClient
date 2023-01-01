@@ -2,6 +2,7 @@ import React from "react";
 import Order from "./Order";
 import { useEffect, useState } from "react";
 import { StockService } from "../services/StockService";
+import { LocalDate } from "local-date";
 
 const OrderList = () => {
   const [order, setOrders] = useState(null);
@@ -30,19 +31,22 @@ const OrderList = () => {
           </p>
         </div>
       </div>
-      <table className="min-w-full">
+      <table className="min-w-full" aria-sort="Status">
         <thead className="bg-gray-400">
           <tr>
-            {/* <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
-              Id
-            </th> */}
+            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+              Order Id
+            </th>
             <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
               Type
             </th>
             <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
               Number of shares
             </th>
-            <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">
+            <th
+              typeof={LocalDate}
+              className="text-left font-medium text-white uppercase tracking-wider py-3 px-6"
+            >
               Expiry Date
             </th>
             <th className="text-left font-medium text-white uppercase tracking-wider py-3 px-6">

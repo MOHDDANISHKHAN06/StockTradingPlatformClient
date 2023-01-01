@@ -30,7 +30,7 @@ const CreateStock = () => {
     new StockService()
       .addStock(stock)
       .then((response) => {
-        navigate("/stocks");
+        navigate("/user");
         console.log(stock);
       })
       .catch((error) => {

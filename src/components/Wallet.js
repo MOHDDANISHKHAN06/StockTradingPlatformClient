@@ -16,7 +16,7 @@ const Wallet = () => {
   const ref2 = useRef();
 
   const [transaction, setTransaction] = useState({
-    emailId: localStorage.getItem("email"),
+    emailId: sessionStorage.getItem("emailId"),
     transactionType: "",
     transactionAmount: "",
     date: "",

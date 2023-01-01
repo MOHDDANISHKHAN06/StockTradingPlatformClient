@@ -24,22 +24,6 @@ const StockList = () => {
 
   return (
     <div className="container mx-auto my-8">
-      <div className="h-12">
-        <button
-          onClick={() => navigate("/login")}
-          className="rounded bg-slate-600 text-white px-6 py-2 font-semibold"
-        >
-          Login
-        </button>
-      </div>
-      <div className="h-12">
-        <button
-          onClick={() => navigate("/register")}
-          className="rounded bg-slate-600 text-white px-6 py-2 font-semibold"
-        >
-          SignUp
-        </button>
-      </div>
       <table className="min-w-full">
         <thead className="bg-gray-400">
           <tr>
