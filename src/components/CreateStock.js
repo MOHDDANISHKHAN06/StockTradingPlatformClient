@@ -31,6 +31,7 @@ const CreateStock = () => {
       .addStock(stock)
       .then((response) => {
         navigate("/user");
+        window.location.reload(true);
         console.log(stock);
       })
       .catch((error) => {

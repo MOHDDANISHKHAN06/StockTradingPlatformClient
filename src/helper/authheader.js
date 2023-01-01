@@ -38,6 +38,7 @@ instance.interceptors.response.use(
       // add a popup with error that login failed.
       console.log("here");
       useNavigate("/stocks");
+      window.location.reload(true);
     }
   }
 );

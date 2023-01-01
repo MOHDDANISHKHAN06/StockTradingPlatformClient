@@ -49,7 +49,7 @@ const Wallet = () => {
         console.log(response);
         navigate("/wallet");
         ref.current.close();
-        // window.location.reload(true);
+        window.location.reload(true);
       })
       .catch((error) => {
         console.log(transaction);
@@ -68,7 +68,7 @@ const Wallet = () => {
         console.log(response);
         navigate("/wallet");
         ref2.current.close();
-        // window.location.reload(true);
+        window.location.reload(true);
       })
       .catch((error) => {
         console.log(transaction);

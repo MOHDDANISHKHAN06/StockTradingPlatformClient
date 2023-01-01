@@ -75,6 +75,7 @@ const UserPage = () => {
   const logout = (e) => {
     sessionStorage.removeItem("user");
     navigate("/login");
+    window.location.reload(true);
   };
 
   return (

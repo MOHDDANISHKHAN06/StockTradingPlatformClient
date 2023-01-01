@@ -22,6 +22,7 @@ const AddUser = () => {
       .saveUser(User)
       .then((response) => {
         navigate("/");
+        window.location.reload(true);
         console.log(response);
       })
       .catch((error) => {

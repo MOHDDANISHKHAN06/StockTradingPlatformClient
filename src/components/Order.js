@@ -16,7 +16,7 @@ const Order = ({ order }) => {
         console.log("navigate");
         console.log(response);
         // navigate("/orders");
-        // window.location.reload(true);
+        window.location.reload(true);
       })
       .catch((error) => {
         console.log(order);
