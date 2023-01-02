@@ -10,6 +10,7 @@ import OrderList from "./components/OrderList";
 import TransactionList from "./components/TransactionList";
 import CreateStock from "./components/CreateStock";
 import UsersList from "./components/UsersList";
+import MarketSchedule from "./components/MarketSchedule";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Header />
         <Routes>
           <Route index element={<LoginPage />}></Route>
+          <Route path="/marketschedule" element={<MarketSchedule />}></Route>
           <Route path="/createstock" element={<CreateStock />}></Route>
           <Route path="listofusers" element={<UsersList />}></Route>
           <Route path="/register" element={<AddUser />}></Route>

@@ -107,7 +107,7 @@ const CreateStock = () => {
         <div className="items-center justify-center h-14 w-full my-4 space-x-4 pt-4">
           <button
             onClick={saveStock}
-            className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6"
+            className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
           >
             Save
           </button>
@@ -116,6 +116,12 @@ const CreateStock = () => {
             className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
           >
             Clear
+          </button>
+          <button
+            className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
+            onClick={() => navigate("/user")}
+          >
+            Back
           </button>
         </div>
       </div>

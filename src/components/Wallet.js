@@ -1,3 +1,4 @@
+import { LocalDate, LocalDateTime } from "local-date";
 import React from "react";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
@@ -19,8 +20,8 @@ const Wallet = () => {
     emailId: sessionStorage.getItem("emailId"),
     transactionType: "",
     transactionAmount: "",
-    date: "",
-    time: "",
+    date: new LocalDate(),
+    time: new LocalDateTime(),
   });
 
   const handleChange = (e) => {
@@ -28,15 +29,13 @@ const Wallet = () => {
     setTransaction({ ...transaction, [e.target.name]: value });
   };
 
-  // const reset = (e) => {
-  //   e.preventDefault();
-  //   setWallet({
-  //     cashAvailable: "",
-  //     buyingPower: "",
-  //   });
-  // };
-
   const [loading, setLoading] = useState(true);
+
+  const cancel = () => {
+    navigate("/wallet");
+    ref.current.close();
+    ref2.current.close();
+  };
 
   const Deposit = (e) => {
     transaction.transactionType = "DEPOSIT";
@@ -102,7 +101,7 @@ const Wallet = () => {
             Cash Available
           </label>
           <input
-            type="text"
+            type="number"
             name="cashAvailable"
             disabled={"disabled"}
             value={wallet.cashAvailable}
@@ -115,7 +114,7 @@ const Wallet = () => {
             Buying Power
           </label>
           <input
-            type="text"
+            type="number"
             name="buyingPower"
             disabled={"disabled"}
             value={wallet.buyingPower}
@@ -142,7 +141,7 @@ const Wallet = () => {
                       Transaction Amount
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="transactionAmount"
                       onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
@@ -168,10 +167,10 @@ const Wallet = () => {
                       Deposit
                     </button>
                     <button
-                      // onClick={reset}
+                      onClick={cancel}
                       className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
                     >
-                      Reset
+                      Cancel
                     </button>
                   </div>
                 </div>
@@ -198,7 +197,7 @@ const Wallet = () => {
                       Transaction Amount
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="transactionAmount"
                       onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
@@ -224,16 +223,22 @@ const Wallet = () => {
                       Withdraw
                     </button>
                     <button
-                      // onClick={reset}
+                      onClick={cancel}
                       className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
                     >
-                      Reset
+                      Cancel
                     </button>
                   </div>
                 </div>
               </div>
             </span>
           </Popup>
+          <button
+            className="rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
+            onClick={() => navigate("/user")}
+          >
+            Back
+          </button>
         </div>
       </div>
     </div>

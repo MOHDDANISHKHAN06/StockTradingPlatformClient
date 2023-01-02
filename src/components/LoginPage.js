@@ -85,8 +85,7 @@ const LoginPage = () => {
             Clear
           </button>
           <button
-            onClick={() => navigate("/register")}         window.location.reload(true);
-
+            onClick={() => navigate("/register")}
             className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
           >
             SignUP

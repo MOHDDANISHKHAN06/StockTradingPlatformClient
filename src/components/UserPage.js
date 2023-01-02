@@ -19,6 +19,12 @@ const UserPage = () => {
 
   const ref = useRef();
 
+  const cancel = (e) => {
+    e.preventDefault();
+    navigate("/user");
+    ref.current.close();
+  };
+
   const [order, setOrder] = useState({
     ticker: "",
     numOfShares: "",
@@ -83,7 +89,7 @@ const UserPage = () => {
       <div className="bg-gray-800">
         <div className="h-16 px-8 flex items-center">
           <p className="text-white text-center font-bold font-center">
-            List Of Stocks
+            Stocks in Market
           </p>
         </div>
       </div>
@@ -130,7 +136,7 @@ const UserPage = () => {
       <div className="bg-gray-800">
         <div className="h-16 px-8 flex items-center">
           <p className="text-white text-center font-bold font-center">
-            List Of User Stocks
+            Your Stocks{" "}
           </p>
         </div>
       </div>
@@ -197,7 +203,7 @@ const UserPage = () => {
                                   Number of shares
                                 </label>
                                 <input
-                                  type="text"
+                                  type="number"
                                   name="numOfShares"
                                   onChange={(e) => handleChange(e)}
                                   className="h-10 w-96 border mt-2 px-2 py-2"
@@ -209,7 +215,7 @@ const UserPage = () => {
                                   Limit Order)
                                 </label>
                                 <input
-                                  type="text"
+                                  type="number"
                                   name="limitValue"
                                   onChange={(e) => handleChange(e)}
                                   className="h-10 w-96 border mt-2 px-2 py-2"
@@ -221,7 +227,7 @@ const UserPage = () => {
                                   placing Limit Order)
                                 </label>
                                 <input
-                                  type="datetime-local"
+                                  type="date"
                                   name="expiry"
                                   onChange={(e) => handleChange(e)}
                                   className="h-10 w-96 border mt-2 px-2 py-2"
@@ -236,8 +242,11 @@ const UserPage = () => {
                                 >
                                   Sell
                                 </button>
-                                <button className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6">
-                                  Clear
+                                <button
+                                  onClick={cancel}
+                                  className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
+                                >
+                                  Cancel
                                 </button>
                               </div>
                             </div>
@@ -256,39 +265,46 @@ const UserPage = () => {
         <tr>
           <button
             onClick={() => navigate("/wallet")}
-            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+            className="rounded text-white font-semibold bg-gray-500 hover:bg-gray-800 py-2 px-6"
           >
             MyWallet
           </button>
           <button
             onClick={() => navigate("/orders")}
-            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+            className="rounded text-white font-semibold bg-gray-500 hover:bg-gray-800 py-2 px-6"
           >
             MyOrders
           </button>
           <button
             onClick={() => navigate("/transactions")}
-            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+            className="rounded text-white font-semibold bg-gray-500 hover:bg-gray-800 py-2 px-6"
           >
             MyTransactions
           </button>
           <button
             hidden={!flag}
             onClick={() => navigate("/createstock")}
-            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+            className="rounded text-white font-semibold bg-gray-500 hover:bg-gray-800 py-2 px-6"
           >
             Create Stock
           </button>
           <button
             hidden={!flag}
             onClick={() => navigate("/listofusers")}
-            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+            className="rounded text-white font-semibold bg-gray-500 hover:bg-gray-800 py-2 px-6"
           >
-            View Users List
+            View Users
+          </button>
+          <button
+            hidden={!flag}
+            onClick={() => navigate("/marketschedule")}
+            className="rounded text-white font-semibold bg-gray-500 hover:bg-gray-800 py-2 px-6"
+          >
+            Change Market
           </button>
           <button
             onClick={logout}
-            className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6"
+            className="rounded text-white font-semibold bg-red-500 hover:bg-gray-800 py-2 px-6"
           >
             Logout
           </button>

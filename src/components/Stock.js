@@ -10,6 +10,12 @@ const Stock = ({ stock }) => {
   const navigate = useNavigate();
   const ref = useRef();
 
+  const cancel = (e) => {
+    e.preventDefault();
+    navigate("/user");
+    ref.current.close();
+  };
+
   const [order, setOrder] = useState({
     ticker: "",
     numOfShares: "",
@@ -115,7 +121,7 @@ const Stock = ({ stock }) => {
                       Number of shares
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="numOfShares"
                       onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
@@ -127,7 +133,7 @@ const Stock = ({ stock }) => {
                       Limit Value (Optional : required for placing Limit Order)
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="limitValue"
                       onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
@@ -138,7 +144,7 @@ const Stock = ({ stock }) => {
                       Date of Expiry (Optional)
                     </label>
                     <input
-                      type="datetime-local"
+                      type="date"
                       name="expiry"
                       onChange={(e) => handleChange(e)}
                       className="h-10 w-96 border mt-2 px-2 py-2"
@@ -151,8 +157,11 @@ const Stock = ({ stock }) => {
                     >
                       Buy
                     </button>
-                    <button className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6">
-                      Clear
+                    <button
+                      onClick={cancel}
+                      className="  rounded text-white font-semibold bg-blue-400 hover:bg-green-700 py-2 px-6"
+                    >
+                      Cancel
                     </button>
                   </div>
                 </div>
