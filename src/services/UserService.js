@@ -14,6 +14,9 @@ const CHANGE_MKT_TIME_BASE_URL =
 const ADD_HOLIDAY_BASE_URL = "http://localhost:8080/api/market/addHoliday";
 const GET_MKT_SCHEDULE_BASE_URL = "http://localhost:8080/api/marketschedule";
 
+const DELETE_HOLIDAY_BASE_URL =
+  "http://localhost:8080/api/market/deleteHoliday";
+
 export class UserService {
   saveUser(user) {
     return instance.post(USER_API_BASE_URL, user);
@@ -43,6 +46,9 @@ export class UserService {
   }
   addHoliday(holiday) {
     return instance.post(ADD_HOLIDAY_BASE_URL, holiday);
+  }
+  deleteHoliday(holiday) {
+    return instance.post(DELETE_HOLIDAY_BASE_URL, holiday);
   }
   getMarketSchedule() {
     return instance.get(GET_MKT_SCHEDULE_BASE_URL);

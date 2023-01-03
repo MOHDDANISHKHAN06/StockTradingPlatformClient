@@ -64,6 +64,22 @@ const MarketSchedule = () => {
       });
   };
 
+  // const deleteHoliday = (e) => {
+  //   e.preventDefault();
+  //   console.log(schedule);
+  //   console.log(schedule.holidays);
+  //   new UserService()
+  //     .deleteHoliday(schedule)
+  //     .then((response) => {
+  //       console.log(response);
+  //       //window.location.reload(true);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       console.log("unsuccessful");
+  //     });
+  // };
+
   return (
     <div className="flex max-w-2xl mx-auto shadow border-b">
       <div className="px-8 py-8">
@@ -126,6 +142,12 @@ const MarketSchedule = () => {
             >
               Add
             </button>
+            {/* <button
+              className="rounded text-white font-semibold bg-blue-500 hover:bg-gray-800 py-2 px-6 mx-36"
+              onClick={deleteHoliday}
+            >
+              Delete
+            </button> */}
           </div>
         </div>
         <div className="items-center justify-center h-14 w-full my-4">

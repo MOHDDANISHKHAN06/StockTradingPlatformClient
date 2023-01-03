@@ -13,7 +13,7 @@ const CreateStock = () => {
     volume: 0,
     dayHigh: 0,
     dayLow: 0,
-    marketCapitalisation: "",
+    marketCapitalisation: 0,
   });
 
   const handleChange = (e) => {
@@ -92,7 +92,7 @@ const CreateStock = () => {
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
         </div>
-        <div className="items-center justify-center h-14 w-full my-4">
+        {/* <div className="items-center justify-center h-14 w-full my-4">
           <label className="block text-gray-600 text-sm font-normal">
             Market Capitalisation
           </label>
@@ -103,7 +103,7 @@ const CreateStock = () => {
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
-        </div>
+        </div> */}
         <div className="items-center justify-center h-14 w-full my-4 space-x-4 pt-4">
           <button
             onClick={saveStock}
