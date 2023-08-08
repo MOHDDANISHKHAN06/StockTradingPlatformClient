@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Stock-Trading-Platform
+**Stock Trading Platform Development**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In a bid to cater to the ever-growing demands of modern stock trading, I undertook the development of a comprehensive stock trading platform, fulfilling a dual role of ensuring both customer interaction and administrative control. The platform was meticulously crafted with Java Spring Boot as the backbone, ensuring robustness and scalability in the backend operations.
 
-## Available Scripts
+For the data layer, I integrated MySQL, a relational database system, to guarantee efficient data management, rapid transactions, and security. The platform provided users with a myriad of functionalities ranging from creating user accounts, trading stocks at market or set prices, to monitoring their portfolio and transaction history. Moreover, users could seamlessly manage their cash accounts, ensuring fluidity in deposits, withdrawals, and the receipt of funds from stock sales.
 
-In the project directory, you can run:
+On the administrative front, the system was enhanced with capabilities for stock creation, defining intricate attributes such as stock ticker, volume, and initial pricing. Vital controls over market hours and schedules were instituted, ensuring trades are permissible only during specific intervals, thereby mirroring real-world stock market operations.
 
-### `npm start`
+To enrich user experience, a dynamic GUI was implemented using ReactJS. This intuitive interface showcased available stocks, vital statistics such as ticker, price, volume, market capitalization, as well as intra-day highs and lows. The interface acted as a bridge between clients and the underlying Java Spring Boot server, seamlessly facilitating user and administrative tasks.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Addressing the project's need for real-time price fluctuations, a custom random stock price generator was designed. This ensured that stock prices exhibited realistic, gradual movements, either ascending or descending, throughout the trading day.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The platform was architected in a Client/Server model where the ReactJS web application epitomized the client, communicating with the backend APIs on the server. This design ensured the system was primed to handle multiple clients concurrently, embodying the bustling nature of stock markets.
 
-### `npm test`
+In summary, this project was a testament to my proficiency in harnessing Java Spring Boot, MySQL, and ReactJS to deliver a holistic stock trading platform, marrying user demands with administrative controls, all while ensuring concurrency and real-time responsiveness.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+Client URL for GitHub: https://github.com/MOHDDANISHKHAN06/StockTradingPlatformClient 
+Server URL for GitHub: https://github.com/MOHDDANISHKHAN06/Stock-Trading-Platform
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Setting up Database:
+●	Install MySQL: While installing create a user to access mysql in the terminal.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+mysql -u root -p
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+●	Create a database which you will use for your project
 
-### `npm run eject`
+Setting up server: Make sure Java is installed and environment variables are set up properly:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+brew install maven
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+git clone https://github.com/MOHDDANISHKHAN06/Stock-Trading-Platform.git
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+●	Modify the following details in application.properties file:
+#database configuration:mysql
+->spring.datasource.url=jdbc:mysql://localhost/StockTradingPlatform(Database Name)
+->spring.datasource.username=sql username
+->spring.datasource.password=password
+->spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#Hibernate configuration
+->spring.jpa.hibernate.ddl-auto=update
+->spring.jpa.show-sql=true
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Cd Stock-Trading-Platform
+sudo mvn spring-boot:run
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Setting up client: Install npm and the follow following steps on terminal
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+git clone https://github.com/MOHDDANISHKHAN06/StockTradingPlatformClient.git
+Cd StockTradingPlatformClient
+Npm install
+Npm run build
+Npm start
