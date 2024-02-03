@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "http://stock-trading-platform-production.up.railway.app/api/:path*"
+    }
+  ]
+}
