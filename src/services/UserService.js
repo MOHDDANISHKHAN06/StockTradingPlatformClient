@@ -5,8 +5,7 @@ var emailId = sessionStorage.getItem("emailId");
 
 // Global constant for the common part of the URLs
 const BASE_URL =
-  "Stp-server-2-env.eba-pctz3tq8.us-east-2.elasticbeanstalk.com/api";
-
+  "http://Stp-server-2-env.eba-pctz3tq8.us-east-2.elasticbeanstalk.com/api";
 // Updated API endpoints using the BASE_URL constant
 const USER_API_BASE_URL = `${BASE_URL}/auth/signup`; // For user registration
 const ALL_USER_API_BASE_URL = `${BASE_URL}/users`; // For retrieving all users
