@@ -2,7 +2,7 @@ import instance from "../helper/authheader";
 
 // Assuming the base URL is the same for these endpoints
 const BASE_URL =
-  "http://stp-server-2-env.eba-pctz3tq8.us-east-2.elasticbeanstalk.com/api";
+  "Stp-server-2-env.eba-pctz3tq8.us-east-2.elasticbeanstalk.com/api";
 
 // Dynamically retrieve the emailId from sessionStorage
 var emailId = sessionStorage.getItem("emailId");
