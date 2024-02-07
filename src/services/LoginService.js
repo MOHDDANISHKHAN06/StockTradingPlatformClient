@@ -1,8 +1,7 @@
 import axios from "axios";
 
-// const LOGIN_BASE_URL = "http://localhost:8080/api/auth/signin";
 const LOGIN_BASE_URL =
-  "http://stock-trading-platform.railway.internal/api/auth/signin"; // Updated URL
+  "http://stp-server-2-env.eba-pctz3tq8.us-east-2.elasticbeanstalk.com/api/auth/signin";
 
 export class LoginService {
   async loginUser(email, password) {

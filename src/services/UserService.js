@@ -3,29 +3,19 @@ import instance from "../helper/authheader";
 var user = JSON.parse(sessionStorage.getItem("user"));
 var emailId = sessionStorage.getItem("emailId");
 
-// const USER_API_BASE_URL = "http://localhost:8080/api/auth/signup";
-const USER_API_BASE_URL =
-  "http://stock-trading-platform.railway.internal/api/auth/signup"; // Updated URL
-// const ALL_USER_API_BASE_URL = `http://localhost:8080/api/users`;
-const ALL_USER_API_BASE_URL = `http://stock-trading-platform.railway.internal/api/users`; // Updated URL
-// const WALLET_API_BASE_URL = `http://localhost:8080/api/users/${emailId}/wallet`;
-const WALLET_API_BASE_URL = `http://stock-trading-platform.railway.internal/api/users/${emailId}/wallet`; // Updated URL
-// const TRANSACTION_API_BASE_URL = `http://localhost:8080/api/users/${emailId}/transaction`;
-const TRANSACTION_API_BASE_URL = `http://stock-trading-platform.railway.internal/api/users/${emailId}/transaction`; // Updated URL
-// const CANCEL_ORDER_CASE_URL = `http://localhost:8080/api/users/${emailId}/cancel`;
-const CANCEL_ORDER_CASE_URL = `http://stock-trading-platform.railway.internal/api/users/${emailId}/cancel`; // Updated URL
-// const CHANGE_MKT_TIME_BASE_URL = "http://localhost:8080/api/market/changemarkethours";
-const CHANGE_MKT_TIME_BASE_URL =
-  "http://stock-trading-platform.railway.internal/api/market/changemarkethours"; // Updated URL
-// const ADD_HOLIDAY_BASE_URL = "http://localhost:8080/api/market/addHoliday";
-const ADD_HOLIDAY_BASE_URL =
-  "http://stock-trading-platform.railway.internal/api/market/addHoliday"; // Updated URL
-// const GET_MKT_SCHEDULE_BASE_URL = "http://localhost:8080/api/marketschedule";
-const GET_MKT_SCHEDULE_BASE_URL =
-  "http://stock-trading-platform.railway.internal/api/marketschedule"; // Updated URL
-// const DELETE_HOLIDAY_BASE_URL = "http://localhost:8080/api/market/deleteHoliday";
-const DELETE_HOLIDAY_BASE_URL =
-  "http://stock-trading-platform.railway.internal/api/market/deleteHoliday"; // Updated URL
+// Global constant for the common part of the URLs
+const BASE_URL = "http://stock-trading-platform.railway.internal/api";
+
+// Updated API endpoints using the BASE_URL constant
+const USER_API_BASE_URL = `${BASE_URL}/auth/signup`; // For user registration
+const ALL_USER_API_BASE_URL = `${BASE_URL}/users`; // For retrieving all users
+const WALLET_API_BASE_URL = `${BASE_URL}/users/${emailId}/wallet`; // For wallet-related actions
+const TRANSACTION_API_BASE_URL = `${BASE_URL}/users/${emailId}/transaction`; // For transactions
+const CANCEL_ORDER_CASE_URL = `${BASE_URL}/users/${emailId}/cancel`; // For canceling orders
+const CHANGE_MKT_TIME_BASE_URL = `${BASE_URL}/market/changemarkethours`; // For changing market hours
+const ADD_HOLIDAY_BASE_URL = `${BASE_URL}/market/addHoliday`; // For adding holidays
+const GET_MKT_SCHEDULE_BASE_URL = `${BASE_URL}/marketschedule`; // For getting market schedules
+const DELETE_HOLIDAY_BASE_URL = `${BASE_URL}/market/deleteHoliday`; // For deleting holidays
 
 export class UserService {
   saveUser(user) {

@@ -1,17 +1,17 @@
 import instance from "../helper/authheader";
 
-// var user = JSON.parse(sessionStorage.getItem("user"));
-// var emailId = user !== null ? user.emailId : null;
+// Assuming the base URL is the same for these endpoints
+const BASE_URL =
+  "http://stp-server-2-env.eba-pctz3tq8.us-east-2.elasticbeanstalk.com/api";
+
+// Dynamically retrieve the emailId from sessionStorage
 var emailId = sessionStorage.getItem("emailId");
-// const STOCK_API_BASE_URL = "http://localhost:8080/api/stocks";
-const STOCK_API_BASE_URL =
-  "http://stock-trading-platform.railway.internal/api/stocks"; // Updated URL
-// const USERSTOCK_API_BASE_URL = `http://localhost:8080/api/users/${emailId}/stocks`;
-const USERSTOCK_API_BASE_URL = `http://stock-trading-platform.railway.internal/api/users/${emailId}/stocks`; // Updated URL
-// const ORDER_API_BASE_URL = `http://localhost:8080/api/users/${emailId}/allorders`;
-const ORDER_API_BASE_URL = `http://stock-trading-platform.railway.internal/api/users/${emailId}/allorders`; // Updated URL
-// const BUY_SELL_API_BASE_URL = `http://localhost:8080/api/users/${emailId}/order`;
-const BUY_SELL_API_BASE_URL = `http://stock-trading-platform.railway.internal/api/users/${emailId}/order`; // Updated URL
+
+// Updated API endpoints using the BASE_URL constant
+const STOCK_API_BASE_URL = `${BASE_URL}/stocks`; // For stock-related actions
+const USERSTOCK_API_BASE_URL = `${BASE_URL}/users/${emailId}/stocks`; // For user-specific stock actions
+const ORDER_API_BASE_URL = `${BASE_URL}/users/${emailId}/allorders`; // For retrieving all orders for a user
+const BUY_SELL_API_BASE_URL = `${BASE_URL}/users/${emailId}/order`; // For placing buy or sell orders
 
 export class StockService {
   getStocks() {
